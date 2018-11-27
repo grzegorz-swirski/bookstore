@@ -4,12 +4,10 @@ import com.grzegorz.bookstore.core.BookDetails;
 import com.grzegorz.bookstore.core.BookEntity;
 import com.grzegorz.bookstore.storage.BookStorage;
 
-import javax.annotation.ManagedBean;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
-@ManagedBean
 public class BookService {
 
     private BookStorage bookStorage;

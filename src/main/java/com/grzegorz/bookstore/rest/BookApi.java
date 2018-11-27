@@ -5,7 +5,6 @@ import com.grzegorz.bookstore.core.BookDetails;
 import com.grzegorz.bookstore.core.BookEntity;
 import com.grzegorz.bookstore.service.BookService;
 
-import javax.annotation.ManagedBean;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Path("/books")
-@ManagedBean
 public class BookApi {
 
     private BookService bookService;
