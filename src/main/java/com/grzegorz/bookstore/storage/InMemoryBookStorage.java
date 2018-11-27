@@ -3,19 +3,21 @@ package com.grzegorz.bookstore.storage;
 import com.grzegorz.bookstore.core.BookDetails;
 import com.grzegorz.bookstore.core.BookEntity;
 
+import javax.annotation.ManagedBean;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@ManagedBean
 public class InMemoryBookStorage implements BookStorage {
 
-    private final Map<String, BookEntity> bookMap;
-
-    public InMemoryBookStorage() {
-        this.bookMap = new HashMap<>();
-        save(new BookDetails("Sample Author1", "Sample Title1"));
-        save(new BookDetails("Sample Author2", "Sample Title2"));
-    }
+    private final Map<String, BookEntity> bookMap = new HashMap<>();
+//
+//    public InMemoryBookStorage() {
+//        this.bookMap = new HashMap<>();
+//        save(new BookDetails("Sample Author1", "Sample Title1"));
+//        save(new BookDetails("Sample Author2", "Sample Title2"));
+//    }
 
     @Override
     public List<BookEntity> findAll() {

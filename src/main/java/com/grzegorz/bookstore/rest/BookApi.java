@@ -4,9 +4,9 @@ import com.grzegorz.bookstore.core.BookCollection;
 import com.grzegorz.bookstore.core.BookDetails;
 import com.grzegorz.bookstore.core.BookEntity;
 import com.grzegorz.bookstore.service.BookService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
+import javax.annotation.ManagedBean;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -17,16 +17,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Path("/books")
-@AllArgsConstructor
-@NoArgsConstructor
+@ManagedBean
 public class BookApi {
 
-    // TODO: return Response objects
-    // TODO: check out DI in Jersey
-    private final BookService bookService = new BookService();
+    private BookService bookService;
 
-    @Context
-    private UriInfo uriInfo;
+    @Inject
+    public BookApi(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,7 +73,7 @@ public class BookApi {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(BookDetails body) {
+    public Response create(@Context UriInfo uriInfo, BookDetails body) {
         BookEntity bookEntity = bookService.create(body);
         return Response
                 .created(uriInfo.getAbsolutePath())

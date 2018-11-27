@@ -3,18 +3,20 @@ package com.grzegorz.bookstore.service;
 import com.grzegorz.bookstore.core.BookDetails;
 import com.grzegorz.bookstore.core.BookEntity;
 import com.grzegorz.bookstore.storage.BookStorage;
-import com.grzegorz.bookstore.storage.InMemoryBookStorage;
 
+import javax.annotation.ManagedBean;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
+@ManagedBean
 public class BookService {
 
-    // TODO: DI
-    private final BookStorage bookStorage;
+    private BookStorage bookStorage;
 
-    public BookService() {
-        this.bookStorage = new InMemoryBookStorage();
+    @Inject
+    public BookService(BookStorage bookStorage) {
+        this.bookStorage = bookStorage;
     }
 
     public List<BookEntity> getAll() {

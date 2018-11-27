@@ -4,6 +4,8 @@ import com.grzegorz.bookstore.core.BookCollection;
 import com.grzegorz.bookstore.core.BookDetails;
 import com.grzegorz.bookstore.core.BookEntity;
 import com.grzegorz.bookstore.rest.BookApi;
+import com.grzegorz.bookstore.service.BookService;
+import com.grzegorz.bookstore.storage.InMemoryBookStorage;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -26,11 +28,15 @@ public class ApiTests {
     // TODO: use Jersey test framework for integration testing
     private BookApi api;
 
+    private UriInfo uriInfoMock;
+
     @Before
     public void setup() throws URISyntaxException {
-        UriInfo uriInfoMock = Mockito.mock(UriInfo.class);
+        uriInfoMock = Mockito.mock(UriInfo.class);
         when(uriInfoMock.getAbsolutePath()).thenReturn(new URI("http://sample/path/"));
-        api = new BookApi(uriInfoMock);
+
+        BookService inMemoryBookService = new BookService(new InMemoryBookStorage());
+        api = new BookApi(inMemoryBookService);
     }
 
     @Test
@@ -68,7 +74,7 @@ public class ApiTests {
         String author = "author-" + UUID.randomUUID().toString();
         String title = "title-" + UUID.randomUUID().toString();
         BookDetails sampleDetails = new BookDetails(author, title);
-        return (BookEntity) api.create(sampleDetails).getEntity();
+        return (BookEntity) api.create(uriInfoMock, sampleDetails).getEntity();
     }
 
     @Test
