@@ -5,7 +5,6 @@ import com.grzegorz.bookstore.core.BookEntity;
 import com.grzegorz.bookstore.storage.BookStorage;
 import com.grzegorz.bookstore.storage.InMemoryBookStorage;
 
-import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 

@@ -8,8 +8,12 @@ import java.util.List;
 public interface BookStorage {
 
     List<BookEntity> findAll();
+
     List<BookEntity> findByAuthor(String author);
+
     List<BookEntity> findByTitle(String title);
+
     BookEntity findById(String id);
+
     BookEntity save(BookDetails value);
 }

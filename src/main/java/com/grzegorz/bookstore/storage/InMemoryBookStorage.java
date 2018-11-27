@@ -13,6 +13,8 @@ public class InMemoryBookStorage implements BookStorage {
 
     public InMemoryBookStorage() {
         this.bookMap = new HashMap<>();
+        save(new BookDetails("Sample Author1", "Sample Title1"));
+        save(new BookDetails("Sample Author2", "Sample Title2"));
     }
 
     @Override
